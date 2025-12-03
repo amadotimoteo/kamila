@@ -23,7 +23,7 @@ body {
 }
 
 .question-container {
-  position: absolute;
+  position: relative;
   top: 40%;
   left: 50%;
   transition: 0.2s;
@@ -72,6 +72,8 @@ body {
 }
 .no-btn {
   left: 54%;
+  position: absolute;
+  transition: 0.15s ease;
 }
 
 .result-container {
