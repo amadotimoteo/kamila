@@ -1,28 +1,39 @@
 const questionContainer = document.querySelector(".question-container");
 const resultContainer = document.querySelector(".result-container");
-const gifResult = document.querySelector(".gif-result");
 const heartLoader = document.querySelector(".cssload-main");
 const yesBtn = document.querySelector(".js-yes-btn");
 const noBtn = document.querySelector(".js-no-btn");
 
-// /change the postion of no button
-noBtn.addEventListener("mouseover", () => {
-  const newX = Math.floor(Math.random() * questionContainer.offsetWidth);
-  const newY = Math.floor(Math.random() * questionContainer.offsetWidth);
+// função para mover o botão "não"
+function moveNoButton() {
+  const containerWidth = questionContainer.offsetWidth - noBtn.offsetWidth;
+  const containerHeight = questionContainer.offsetHeight - noBtn.offsetHeight;
 
+  let newX = Math.random() * containerWidth;
+  let newY = Math.random() * containerHeight;
+
+  noBtn.style.position = "absolute";
+  noBtn.style.transition = "0.15s"; // suave
   noBtn.style.left = `${newX}px`;
   noBtn.style.top = `${newY}px`;
+}
+
+// Foge no PC
+noBtn.addEventListener("mouseover", moveNoButton);
+
+// Foge no celular
+noBtn.addEventListener("touchstart", (e) => {
+  e.preventDefault(); // impede o toque de clicar
+  moveNoButton();
 });
 
-// yes button functionality
-
+// botão "sim"
 yesBtn.addEventListener("click", () => {
   questionContainer.style.display = "none";
   heartLoader.style.display = "inherit";
 
-  const timeoutId = setTimeout(() => {
+  setTimeout(() => {
     heartLoader.style.display = "none";
     resultContainer.style.display = "inherit";
-    gifResult.play();
   }, 3000);
 });
